@@ -299,7 +299,7 @@ class GNNNodeClassifier(tf.keras.Model):
 #Output Computation:
 #The embeddings of the nodes specified by input_node_indices are fetched.
 #The final output probabilities for each node in the batch are computed using the compute_out dense layer.
-      #-------------------------------------------
+#-----------------------------------------------------------------------------------------------------------
       #ann_matrix["protID"].unique(): This retrieves all unique protein IDs from the protID column of the DataFrame ann_matrix.
 #sorted(...): Sorts these unique protein IDs.
 #enumerate(...): Enumerates the sorted protein IDs, providing both an index (idx) and the protein ID (name).
