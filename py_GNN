@@ -185,6 +185,7 @@ class GraphConvLayer(layers.Layer):
         # Update the node embedding with the neighbour messages.
         return self.update(node_repesentations, aggregated_messages)
       #----------------------------------------------
+#The GNNNodeClassifier class is a TensorFlow Keras model for node classification in a graph using Graph Neural Networks (GNN). Here’s a detailed breakdown of each part of the class and its functionality
 class GNNNodeClassifier(tf.keras.Model):
     def __init__(
         self,
