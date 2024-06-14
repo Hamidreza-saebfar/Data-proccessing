@@ -304,7 +304,7 @@ class GNNNodeClassifier(tf.keras.Model):
 #sorted(...): Sorts these unique protein IDs.
 #enumerate(...): Enumerates the sorted protein IDs, providing both an index (idx) and the protein ID (name).
 #np.ones((len(prot_idx), emb_size)): Creates a NumPy array of shape (number_of_proteins, embedding_size), filled with ones. Each protein (node) will have an embedding of size 32.
- #prot_idx = {name: idx for idx, name in enumerate(sorted(ann_matrix["protID"].unique()))}
+#prot_idx = {name: idx for idx, name in enumerate(sorted(ann_matrix["protID"].unique()))}
 #tf.cast(node_features, dtype=tf.float32): Converts the NumPy array node_features to a TensorFlow tensor with data type float32.
 
  emb_size = 32
