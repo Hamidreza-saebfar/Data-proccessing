@@ -18,7 +18,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 network_matrix = pd.read_csv('triplet.weight.n1.csv')
 
 # Drop the 'Unnamed: 0' column
-network_matrix = yst_network.drop('Unnamed: 0', axis=1)
+network_matrix = network_matrix .drop('Unnamed: 0', axis=1)
 
 #load lable_annotation_matrix
 ann_matrix_C =pd.read_csv('ann.filt.4932.C.csv', sep="," , header =0)
@@ -46,7 +46,7 @@ feature_names = set(ann_matrix.columns)
 #This line calculates the number of unique features (i.e., the number of columns in the DataFrame) and stores it in num_features
 num_features = len(feature_names)
 #This line sorts the DataFrame ann_matrix based on the values in the "protID" column. The sorted DataFrame is stored in sorted_df
-sorted_df = yst_ann_matrix_C.sort_values("protID")
+sorted_df = ann_matrix_C.sort_values("protID")
 #This line selects only the columns with numeric data types from the sorted DataFrame sorted_df. The resulting DataFrame with numeric columns is stored in numeric_cols.
 numeric_cols = sorted_df.select_dtypes(include=[np.number])
 #This line converts the DataFrame numeric_cols to a NumPy array and ensures that all the elements in the array are of type float. The resulting NumPy array is stored in data_array.
@@ -299,18 +299,18 @@ class GNNNodeClassifier(tf.keras.Model):
         out = self.compute_out(node_embeddings)
         return out
       #-------------------------------------------
-      #ann_matrix["protID"].unique(): This retrieves all unique protein IDs from the protID column of the DataFrame yst_ann_matrix_C.
+      #ann_matrix["protID"].unique(): This retrieves all unique protein IDs from the protID column of the DataFrame ann_matrix.
 #sorted(...): Sorts these unique protein IDs.
 #enumerate(...): Enumerates the sorted protein IDs, providing both an index (idx) and the protein ID (name).
 #np.ones((len(prot_idx), emb_size)): Creates a NumPy array of shape (number_of_proteins, embedding_size), filled with ones. Each protein (node) will have an embedding of size 32.
- #prot_idx = {name: idx for idx, name in enumerate(sorted(yst_ann_matrix_C["protID"].unique()))}
+ #prot_idx = {name: idx for idx, name in enumerate(sorted(ann_matrix["protID"].unique()))}
 #tf.cast(node_features, dtype=tf.float32): Converts the NumPy array node_features to a TensorFlow tensor with data type float32.
 
  emb_size = 32
 node_features = np.ones((len(prot_idx), emb_size))#prot_idx or protID(first.col of label.matrix)
 node_features = tf.cast(node_features, dtype=tf.float32)
 #-------------------------------------------------
-#This loop iterates over the range starting from 1 to the number of columns in yst_ann_matrix_C. It skips the first column, which is presumably protID.
+#This loop iterates over the range starting from 1 to the number of columns in ann_matrix. It skips the first column, which is presumably protID.
 #ann_matrix.iloc[:, kk] extracts the kk-th column of the DataFrame 
 #Creates a dictionary mapping each unique value in class_values to a unique index using enumerate
 #Calculates the number of unique classes in the current column.
