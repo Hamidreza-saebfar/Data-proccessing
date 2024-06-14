@@ -194,30 +194,7 @@ class GraphConvLayer(layers.Layer):
         # Update the node embedding with the neighbour messages.
         return self.update(node_repesentations, aggregated_messages)
       #----------------------------------------------
-#The GNNNodeClassifier class is a TensorFlow Keras model for node classification in a graph using Graph Neural Networks (GNN). Here’s a detailed breakdown of each part of the class and its functionality
-#__init__ method: This constructor initializes the GNNNodeClassifier model with the specified parameters.
-#graph_info: A tuple containing node features, edges, and edge weights.
-#num_classes: Number of classes for classification.
-#hidden_units: List of hidden units for the MLP layers.
-#aggregation_type: Type of aggregation to use in the graph convolution layer ("mean", "sum", or "max").
-#update_type: Type of update function to use in the graph convolution layer (currently only MLP).
-#dropout_rate: Dropout rate for the MLP layers.
-#normalize: Boolean flag to indicate whether to normalize the output embeddings.
-#*args, **kwargs: Additional arguments passed to the base Model class.
-#An MLP layer for preprocessing the node features before applying graph convolutions.
-#Two graph convolution layers for learning node embeddings from the graph structure and node features.
-#call method: Defines the forward pass of the model.
-#input_node_indices: Indices of the nodes for which to compute the embeddings and output class probabilities (represents the batch).
-#Preprocessing:
-#The node features are preprocessed using the preprocess MLP.
-#Graph Convolution Layers:
-#The preprocessed node representations are passed through two graph convolution layers.
-#Skip connections are commented out, so the output of each convolution layer directly overwrites x.
-#Postprocessing:
-#The node embeddings are postprocessed using the postprocess MLP.
-#Output Computation:
-#The embeddings of the nodes specified by input_node_indices are fetched.
-#The final output probabilities for each node in the batch are computed using the compute_out dense layer.
+
 
 
 class GNNNodeClassifier(tf.keras.Model):
@@ -298,6 +275,30 @@ class GNNNodeClassifier(tf.keras.Model):
         node_embeddings = tf.gather(x, input_node_indices)
         out = self.compute_out(node_embeddings)
         return out
+        #The GNNNodeClassifier class is a TensorFlow Keras model for node classification in a graph using Graph Neural Networks (GNN). Here’s a detailed breakdown of each part of the class and its functionality
+#__init__ method: This constructor initializes the GNNNodeClassifier model with the specified parameters.
+#graph_info: A tuple containing node features, edges, and edge weights.
+#num_classes: Number of classes for classification.
+#hidden_units: List of hidden units for the MLP layers.
+#aggregation_type: Type of aggregation to use in the graph convolution layer ("mean", "sum", or "max").
+#update_type: Type of update function to use in the graph convolution layer (currently only MLP).
+#dropout_rate: Dropout rate for the MLP layers.
+#normalize: Boolean flag to indicate whether to normalize the output embeddings.
+#*args, **kwargs: Additional arguments passed to the base Model class.
+#An MLP layer for preprocessing the node features before applying graph convolutions.
+#Two graph convolution layers for learning node embeddings from the graph structure and node features.
+#call method: Defines the forward pass of the model.
+#input_node_indices: Indices of the nodes for which to compute the embeddings and output class probabilities (represents the batch).
+#Preprocessing:
+#The node features are preprocessed using the preprocess MLP.
+#Graph Convolution Layers:
+#The preprocessed node representations are passed through two graph convolution layers.
+#Skip connections are commented out, so the output of each convolution layer directly overwrites x.
+#Postprocessing:
+#The node embeddings are postprocessed using the postprocess MLP.
+#Output Computation:
+#The embeddings of the nodes specified by input_node_indices are fetched.
+#The final output probabilities for each node in the batch are computed using the compute_out dense layer.
       #-------------------------------------------
       #ann_matrix["protID"].unique(): This retrieves all unique protein IDs from the protID column of the DataFrame ann_matrix.
 #sorted(...): Sorts these unique protein IDs.
